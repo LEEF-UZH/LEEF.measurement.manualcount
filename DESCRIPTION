@@ -1,4 +1,4 @@
-Package: LEEF.manualcount
+Package: LEEF.measurement.manualcount
 Type: Package
 Title: Pre-process and extract manualcount
 Version: 0.2.0
@@ -7,7 +7,7 @@ Maintainer: The package maintainer <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: MIT + file LICENSE
-Depends: LEEF.Data
+Depends: R (>= 3.5.0), LEEF.Data
 Imports: dplyr, readr
 Encoding: UTF-8
 LazyData: true

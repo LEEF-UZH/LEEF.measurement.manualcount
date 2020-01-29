@@ -14,7 +14,7 @@ pre_processor_manualcount <- function(
   output
 ) {
   cat("\n########################################################\n")
-  cat("\nProcessing incubatortemp...\n")
+  cat("\nProcessing manualcount\n")
   ##
   dir.create(
     file.path(output, "manualcount"),
