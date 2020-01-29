@@ -11,7 +11,6 @@
 #' @return invisibly \code{TRUE} when completed successful
 #'
 #' @importFrom dplyr bind_rows
-#' @importFrom magrittr %>% %<>%
 #' @importFrom readr read_csv
 #' @export
 #'
@@ -40,14 +39,14 @@ extractor_manualcount <- function( input, output ) {
   mc <- lapply(
     manualcount_files,
     readr::read_csv
-  ) %>%
-    # combine intu one large tibble
-    dplyr::bind_rows(.)
+  )
+  # combine intu one large tibble
+  mc <- dplyr::bind_rows(mc)
 
 # SAVE --------------------------------------------------------------------
 
   add_path <- file.path( output, "manualcount" )
-  dir.create( add_path )
+  dir.create( add_path, recursive = TRUE, showWarnings = FALSE )
   saveRDS(
     object = mc,
     file = file.path(add_path, "manualcount.rds")

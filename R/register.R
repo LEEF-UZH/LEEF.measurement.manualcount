@@ -6,8 +6,9 @@
 #' @export
 #'
 register <- function() {
+  LEEF.Data::add_pre_processor( pre_processor_manualcount )
   LEEF.Data::add_extractor( extractor_manualcount )
-
+  ##
   invisible(TRUE)
 }
 
