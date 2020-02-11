@@ -15,8 +15,8 @@
 #' @export
 #'
 extractor_manualcount <- function( input, output ) {
-  cat("\n########################################################\n")
-  cat("Extracting manualcount...\n")
+  message("\n########################################################\n")
+  message("Extracting manualcount...\n")
 
   # Get csv file names ------------------------------------------------------
 
@@ -29,8 +29,8 @@ extractor_manualcount <- function( input, output ) {
   )
 
   if (length(manualcount_files) == 0) {
-    cat("nothing to extract\n")
-    cat("\n########################################################\n")
+    message("nothing to extract\n")
+    message("\n########################################################\n")
     return(invisible(FALSE))
   }
 
@@ -54,8 +54,8 @@ extractor_manualcount <- function( input, output ) {
 
 # Finalize ----------------------------------------------------------------
 
-  cat("done\n")
-  cat("\n########################################################\n")
+  message("done\n")
+  message("\n########################################################\n")
 
   invisible(TRUE)
 }

@@ -13,8 +13,8 @@ pre_processor_manualcount <- function(
   input,
   output
 ) {
-  cat("\n########################################################\n")
-  cat("\nProcessing manualcount\n")
+  message("\n########################################################\n")
+  message("\nProcessing manualcount\n")
   ##
   dir.create(
     file.path(output, "manualcount"),
@@ -27,8 +27,8 @@ pre_processor_manualcount <- function(
     recursive = TRUE
   )
   ##
-  cat("done\n")
-  cat("\n########################################################\n")
+  message("done\n")
+  message("\n########################################################\n")
 
   invisible(TRUE)
 }
