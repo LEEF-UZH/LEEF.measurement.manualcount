@@ -16,16 +16,54 @@ pre_processor_manualcount <- function(
   message("\n########################################################\n")
   message("\nProcessing manualcount\n")
   ##
+  tmpdir <- tempfile()
+  dir.create(tmpdir, recursive = TRUE)
+  fns <- list.files(
+    path = file.path(input, "manualcount"),
+    pattern = "\\.xlsx$",
+    full.names = TRUE,
+    recursive = FALSE
+  )
+  if (length(fns) > 0) {
+    if (length(fns) > 1) {
+      warning("Only one `.xlsx` file expected! Only the first one will be abalysed!")
+    }
+    fn <- fns[[1]]
+    if (length(readxl::excel_sheets(fn)) > 1) {
+      warning("Only one sheet in the excel workbook expected! Only the first one will be abalysed!")
+    }
+
+    csvn <- gsub(
+      pattern = "\\.xlsx$",
+      replacement = ".csv",
+      basename(fn)
+    )
+
+    x <- readxl::read_excel(
+      path = fns[[1]],
+      sheet = 1
+    )
+    write.csv(
+      x,
+      file = file.path(tmpdir, csvn),
+      row.names = FALSE
+    )
+  } else {
+    message("Empty input directory - nothing to do!\n")
+    message("\n########################################################\n")
+  }
+
   dir.create(
     file.path(output, "manualcount"),
     recursive = TRUE,
     showWarnings = FALSE
   )
   file.copy(
-    from = file.path(input, "manualcount", "."),
+    from = file.path(tmpdir, "."),
     to = file.path(output, "manualcount"),
     recursive = TRUE
   )
+  unlink(tmpdir)
   ##
   message("done\n")
   message("\n########################################################\n")

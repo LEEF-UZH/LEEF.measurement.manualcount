@@ -23,7 +23,7 @@ extractor_manualcount <- function( input, output ) {
   manualcount_path <- file.path( input, "manualcount" )
   manualcount_files <- list.files(
     path = manualcount_path,
-    pattern = "*.csv",
+    pattern = "\\.csv$",
     full.names = TRUE,
     recursive = TRUE
   )
@@ -34,14 +34,16 @@ extractor_manualcount <- function( input, output ) {
     return(invisible(FALSE))
   }
 
+  if (length(manualcount_files) > 1) {
+    warning("Only one `.csv` file expected! Only the first one will be abalysed!")
+  }
+
+  fn <- manualcount_files[[1]]
+
 # Read file ---------------------------------------------------------------
 
-  mc <- lapply(
-    manualcount_files,
-    readr::read_csv
-  )
-  # combine intu one large tibble
-  mc <- dplyr::bind_rows(mc)
+  mc <- read.csv(fn)
+  mc$density <- mc$Count / mc$ml.counted
 
 # SAVE --------------------------------------------------------------------
 
