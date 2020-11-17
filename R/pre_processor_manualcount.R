@@ -6,7 +6,7 @@
 #' @param output directory to which to write the data
 #'
 #' @return invisibly \code{TRUE} when completed successful
-#'
+#' @importFrom readxl read_excel
 #' @export
 
 pre_processor_manualcount <- function(

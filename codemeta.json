@@ -83,15 +83,15 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "readr",
-      "name": "readr",
+      "identifier": "readxl",
+      "name": "readxl",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=readr"
+      "sameAs": "https://CRAN.R-project.org/package=readxl"
     }
   ],
   "readme": "https://github.com/LEEF-UZH/LEEF.measurement.manualcount/blob/master/Readme.md",
