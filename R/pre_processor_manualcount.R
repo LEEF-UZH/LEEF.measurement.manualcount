@@ -64,6 +64,11 @@ pre_processor_manualcount <- function(
     recursive = TRUE
   )
   unlink(tmpdir)
+  file.copy(
+    from = file.path(input, "sample_metadata.yml"),
+    to = file.path(output, "sample_metadata.yml")
+  )
+
   ##
   message("done\n")
   message("\n########################################################\n")

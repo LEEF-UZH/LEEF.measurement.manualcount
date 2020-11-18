@@ -55,6 +55,10 @@ extractor_manualcount <- function( input, output ) {
     object = mc,
     file = file.path(add_path, "manualcount.rds")
   )
+  file.copy(
+    from = file.path(input, "sample_metadata.yml"),
+    to = file.path(output, "sample_metadata.yml")
+  )
 
 # Finalize ----------------------------------------------------------------
 
