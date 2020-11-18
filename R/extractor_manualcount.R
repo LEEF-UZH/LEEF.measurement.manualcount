@@ -47,6 +47,8 @@ extractor_manualcount <- function( input, output ) {
 
 # SAVE --------------------------------------------------------------------
 
+  names(mc) <- tolower(names(mc))
+
   add_path <- file.path( output, "manualcount" )
   dir.create( add_path, recursive = TRUE, showWarnings = FALSE )
   saveRDS(
