@@ -9,9 +9,9 @@
 #' @param output directory to which to write the data
 #'
 #' @return invisibly \code{TRUE} when completed successful
+#' @importFrom yaml read_yaml
+#' @importFrom utils read.csv
 #'
-#' @importFrom dplyr bind_rows
-#' @importFrom readr read_csv
 #' @export
 #'
 extractor_manualcount <- function( input, output ) {
@@ -42,17 +42,18 @@ extractor_manualcount <- function( input, output ) {
 
 # Read file ---------------------------------------------------------------
 
-  mc <- read.csv(fn)
-  mc$density <- mc$Count / mc$ml.counted
+  dat <- utils::read.csv(fn)
+  dat$density <- dat$Count / dat$ml.counted
+
+  timestamp <- yaml::read_yaml(file.path(input, "sample_metadata.yml"))$timestamp
+  dat <- cbind(timestamp = timestamp, dat)
 
 # SAVE --------------------------------------------------------------------
-
-  names(mc) <- tolower(names(mc))
 
   add_path <- file.path( output, "manualcount" )
   dir.create( add_path, recursive = TRUE, showWarnings = FALSE )
   saveRDS(
-    object = mc,
+    object = dat,
     file = file.path(add_path, "manualcount.rds")
   )
   file.copy(

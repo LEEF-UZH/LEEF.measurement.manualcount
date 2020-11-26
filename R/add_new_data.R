@@ -9,6 +9,7 @@
 #'   \code{TRUE} if moved, \code{FALSE} if an error occurred. Details of the error
 #'   are in the error files in the \code{input/manualcount} directory.
 #' @importFrom parallel mclapply
+#' @importFrom utils capture.output read.csv
 #' @export
 #'
 add_new_data <- function(input, output) {
@@ -56,7 +57,7 @@ add_new_data <- function(input, output) {
         {
           if (file.exists(processing)) {
             unlink(processing)
-            capture.output(print(result), file = error)
+            utils::capture.output(print(result), file = error)
           }
         }
       )
@@ -70,7 +71,7 @@ add_new_data <- function(input, output) {
 
       # Check if file exist ----------------------------------------------------------
 
-      x <- read.csv(
+      x <- utils::read.csv(
         file.path(input, f),
         header = TRUE
       )

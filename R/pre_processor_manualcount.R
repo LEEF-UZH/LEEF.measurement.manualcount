@@ -7,6 +7,7 @@
 #'
 #' @return invisibly \code{TRUE} when completed successful
 #' @importFrom readxl read_excel
+#' @importFrom utils write.csv
 #' @export
 
 pre_processor_manualcount <- function(
@@ -43,7 +44,7 @@ pre_processor_manualcount <- function(
       path = fns[[1]],
       sheet = 1
     )
-    write.csv(
+    utils::write.csv(
       x,
       file = file.path(tmpdir, csvn),
       row.names = FALSE
