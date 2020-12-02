@@ -52,9 +52,10 @@ extractor_manualcount <- function( input, output ) {
 
   add_path <- file.path( output, "manualcount" )
   dir.create( add_path, recursive = TRUE, showWarnings = FALSE )
-  saveRDS(
-    object = dat,
-    file = file.path(add_path, "manualcount.rds")
+  write.csv(
+    dat,
+    file = file.path(add_path, "manualcount.csv"),
+    row.names = FALSE
   )
   file.copy(
     from = file.path(input, "sample_metadata.yml"),
