@@ -67,7 +67,7 @@ pre_processor_manualcount <- function(
   unlink(tmpdir)
   file.copy(
     from = file.path(input, "sample_metadata.yml"),
-    to = file.path(output, "sample_metadata.yml")
+    to = file.path(output, "manualcount", "sample_metadata.yml")
   )
 
   ##

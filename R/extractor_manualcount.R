@@ -10,7 +10,7 @@
 #'
 #' @return invisibly \code{TRUE} when completed successful
 #' @importFrom yaml read_yaml
-#' @importFrom utils read.csv
+#' @importFrom utils read.csv write.csv
 #'
 #' @export
 #'
@@ -45,21 +45,31 @@ extractor_manualcount <- function( input, output ) {
   dat <- utils::read.csv(fn)
   dat$density <- dat$Count / dat$ml.counted
 
-  timestamp <- yaml::read_yaml(file.path(input, "sample_metadata.yml"))$timestamp
+  timestamp <- yaml::read_yaml(file.path(input, "manualcount", "sample_metadata.yml"))$timestamp
   dat <- cbind(timestamp = timestamp, dat)
+
+  names(dat) <- tolower(names(dat))		
+  
+	######################################################
+	### PREFERABLY RENAME IN INPUT FILE                ###
+	###     													                 ###
+	names(dat)[names(dat) == "microcosm"] <- "bottle"  ###
+	dat$bottle <- as.integer(dat$bottle)               ###
+	### 															                 ###
+	######################################################
 
 # SAVE --------------------------------------------------------------------
 
   add_path <- file.path( output, "manualcount" )
   dir.create( add_path, recursive = TRUE, showWarnings = FALSE )
-  write.csv(
+  utils::write.csv(
     dat,
     file = file.path(add_path, "manualcount.csv"),
     row.names = FALSE
   )
   file.copy(
-    from = file.path(input, "sample_metadata.yml"),
-    to = file.path(output, "sample_metadata.yml")
+    from = file.path(input, "manualcount", "sample_metadata.yml"),
+    to = file.path(output, "manualcount", "sample_metadata.yml")
   )
 
 # Finalize ----------------------------------------------------------------
