@@ -60,6 +60,13 @@ pre_processor_manualcount <- function(
     showWarnings = FALSE
   )
   file.copy(
+  	file.path( input, "..", "00.general.parameter", "." ),
+  	file.path( output, "manualcount" ),
+  	recursive = TRUE,
+  	overwrite = TRUE
+  )
+
+  file.copy(
     from = file.path(tmpdir, "."),
     to = file.path(output, "manualcount"),
     recursive = TRUE
