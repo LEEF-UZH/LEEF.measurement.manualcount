@@ -28,6 +28,8 @@ extractor_manualcount <- function( input, output ) {
     recursive = TRUE
   )
 
+	manualcount_files <- grep("composition|experimental_design|dilution", manualcount_files, invert = TRUE, value = TRUE)
+	
   if (length(manualcount_files) == 0) {
     message("nothing to extract\n")
     message("\n########################################################\n")
