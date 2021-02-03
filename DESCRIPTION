@@ -1,7 +1,7 @@
 Package: LEEF.measurement.manualcount
 Type: Package
 Title: Pre-Process and Extract Manualcount
-Version: 0.9.1
+Version: 0.9.2
 Authors@R: c(
   person(given = "Rainer M.", family = "Krug", email = "Rainer.Krug@uzh.ch", role = c("aut", "cre"))
   )

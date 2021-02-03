@@ -17,6 +17,14 @@ pre_processor_manualcount <- function(
   message("\n########################################################\n")
   message("\nProcessing manualcount\n")
   ##
+  
+  if ( length( list.files( file.path(input, "manualcount") ) ) == 0 ) {
+    message("\nEmpty or missing manualcount directory - nothing to do.\n")
+    message("\ndone\n")
+    message("########################################################\n")
+    return(invisible(TRUE))
+  }
+  
   tmpdir <- tempfile()
   dir.create(tmpdir, recursive = TRUE)
   fns <- list.files(
@@ -27,7 +35,7 @@ pre_processor_manualcount <- function(
   )
   if (length(fns) > 0) {
     if (length(fns) > 1) {
-      warning("Only one `.xlsx` file expected! Only the first one will be abalysed!")
+      warning("Only one `.xlsx` file expected! Only the first one will be analysed!")
     }
     fn <- fns[[1]]
     if (length(readxl::excel_sheets(fn)) > 1) {
@@ -49,35 +57,33 @@ pre_processor_manualcount <- function(
       file = file.path(tmpdir, csvn),
       row.names = FALSE
     )
-  } else {
-    message("Empty input directory - nothing to do!\n")
-    message("\n########################################################\n")
+		dir.create(
+  	  file.path(output, "manualcount"),
+	  	recursive = TRUE,
+	  	showWarnings = FALSE
+	  )
+	  file.copy(
+	  	file.path( input, "..", "00.general.parameter", "." ),
+	  	file.path( output, "manualcount" ),
+ 		 	recursive = TRUE,
+ 		 	overwrite = TRUE
+ 	 )
+
+	  dir.create(
+  	  file.path(output, "manualcount"),
+   	 recursive = TRUE,
+   	 showWarnings = FALSE
+  	)
+  	
+  	file.copy(
+ 	   from = file.path(tmpdir, "."),
+ 	   to = file.path(output, "manualcount"),
+ 	   recursive = TRUE
+	  )
   }
-
-  dir.create(
-    file.path(output, "manualcount"),
-    recursive = TRUE,
-    showWarnings = FALSE
-  )
-  file.copy(
-  	file.path( input, "..", "00.general.parameter", "." ),
-  	file.path( output, "manualcount" ),
-  	recursive = TRUE,
-  	overwrite = TRUE
-  )
-
-  file.copy(
-    from = file.path(tmpdir, "."),
-    to = file.path(output, "manualcount"),
-    recursive = TRUE
-  )
   unlink(tmpdir)
-  file.copy(
-    from = file.path(input, "sample_metadata.yml"),
-    to = file.path(output, "manualcount", "sample_metadata.yml")
-  )
-
-  ##
+    
+ ##
   message("done\n")
   message("\n########################################################\n")
 
