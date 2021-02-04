@@ -29,7 +29,7 @@ extractor_manualcount <- function( input, output ) {
   )
 
 	manualcount_files <- grep("composition|experimental_design|dilution", manualcount_files, invert = TRUE, value = TRUE)
-	
+
   if (length(manualcount_files) == 0) {
     message("nothing to extract\n")
     message("\n########################################################\n")
@@ -45,20 +45,12 @@ extractor_manualcount <- function( input, output ) {
 # Read file ---------------------------------------------------------------
 
   dat <- utils::read.csv(fn)
-  dat$density <- dat$Count / dat$ml.counted
+  dat$density <- dat$count / dat$ml_counted
 
   timestamp <- yaml::read_yaml(file.path(input, "manualcount", "sample_metadata.yml"))$timestamp
   dat <- cbind(timestamp = timestamp, dat)
 
-  names(dat) <- tolower(names(dat))		
-  
-	######################################################
-	### PREFERABLY RENAME IN INPUT FILE                ###
-	###     													                 ###
-	names(dat)[names(dat) == "microcosm"] <- "bottle"  ###
-	dat$bottle <- as.integer(dat$bottle)               ###
-	### 															                 ###
-	######################################################
+  names(dat) <- tolower(names(dat))
 
 # SAVE --------------------------------------------------------------------
 
@@ -69,9 +61,16 @@ extractor_manualcount <- function( input, output ) {
     file = file.path(add_path, "manualcount.csv"),
     row.names = FALSE
   )
+
+  fns <- grep(
+    basename(fn),
+    list.files(file.path(input, "manualcount")),
+    invert = TRUE,
+    value = TRUE
+  )
   file.copy(
-    from = file.path(input, "manualcount", "sample_metadata.yml"),
-    to = file.path(output, "manualcount", "sample_metadata.yml")
+    from = file.path(input, "manualcount", fns),
+    to = file.path(output, "manualcount", "")
   )
 
 # Finalize ----------------------------------------------------------------
