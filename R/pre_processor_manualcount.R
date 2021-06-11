@@ -17,15 +17,15 @@ pre_processor_manualcount <- function(
   message("\n########################################################\n")
   message("\nProcessing manualcount\n")
   ##
-  
+
   if ( length( list.files( file.path(input, "manualcount") ) ) == 0 ) {
     message("\nEmpty or missing manualcount directory - nothing to do.\n")
     message("\ndone\n")
     message("########################################################\n")
     return(invisible(TRUE))
   }
-  
-  tmpdir <- tempfile()
+
+  tmpdir <- file.path(output, "tmp")
   dir.create(tmpdir, recursive = TRUE)
   fns <- list.files(
     path = file.path(input, "manualcount"),
@@ -74,7 +74,7 @@ pre_processor_manualcount <- function(
    	 recursive = TRUE,
    	 showWarnings = FALSE
   	)
-  	
+
   	file.copy(
  	   from = file.path(tmpdir, "."),
  	   to = file.path(output, "manualcount"),
@@ -82,7 +82,7 @@ pre_processor_manualcount <- function(
 	  )
   }
   unlink(tmpdir)
-    
+
  ##
   message("done\n")
   message("\n########################################################\n")
