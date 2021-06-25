@@ -25,8 +25,6 @@ pre_processor_manualcount <- function(
     return(invisible(TRUE))
   }
 
-  tmpdir <- file.path(output, "tmp")
-  dir.create(tmpdir, recursive = TRUE)
   fns <- list.files(
     path = file.path(input, "manualcount"),
     pattern = "\\.xlsx$",
@@ -48,8 +46,20 @@ pre_processor_manualcount <- function(
       basename(fn)
     )
 
+    dir.create(
+      file.path(output, "manualcount"),
+      recursive = TRUE,
+      showWarnings = FALSE
+    )
+    file.copy(
+      file.path( input, "..", "00.general.parameter", "." ),
+      file.path( output, "manualcount" ),
+      recursive = TRUE,
+      overwrite = TRUE
+    )
+
     x <- readxl::read_excel(
-      path = fns[[1]],
+      path = fn,
       sheet = 1
     )
     utils::write.csv(
@@ -57,31 +67,13 @@ pre_processor_manualcount <- function(
       file = file.path(tmpdir, csvn),
       row.names = FALSE
     )
-		dir.create(
-  	  file.path(output, "manualcount"),
-	  	recursive = TRUE,
-	  	showWarnings = FALSE
-	  )
-	  file.copy(
-	  	file.path( input, "..", "00.general.parameter", "." ),
-	  	file.path( output, "manualcount" ),
- 		 	recursive = TRUE,
- 		 	overwrite = TRUE
- 	 )
 
 	  dir.create(
-  	  file.path(output, "manualcount"),
+  	  file.path(output, "manualcount", "manualcount"),
    	 recursive = TRUE,
    	 showWarnings = FALSE
   	)
-
-  	file.copy(
- 	   from = file.path(tmpdir, "."),
- 	   to = file.path(output, "manualcount"),
- 	   recursive = TRUE
-	  )
   }
-  unlink(tmpdir)
 
  ##
   message("done\n")
