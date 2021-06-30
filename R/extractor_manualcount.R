@@ -28,7 +28,12 @@ extractor_manualcount <- function( input, output ) {
     recursive = TRUE
   )
 
-	manualcount_files <- grep("composition|experimental_design|dilution", manualcount_files, invert = TRUE, value = TRUE)
+	manualcount_files <- grep(
+	  "composition|experimental_design|dilution",
+	  manualcount_files,
+	  invert = TRUE,
+	  value = TRUE
+	)
 
   if (length(manualcount_files) == 0) {
     message("nothing to extract\n")
@@ -55,7 +60,11 @@ extractor_manualcount <- function( input, output ) {
 # SAVE --------------------------------------------------------------------
 
   add_path <- file.path( output, "manualcount" )
-  dir.create( add_path, recursive = TRUE, showWarnings = FALSE )
+  dir.create(
+    add_path,
+    recursive = TRUE,
+    showWarnings = FALSE
+  )
   utils::write.csv(
     dat,
     file = file.path(add_path, "manualcount.csv"),

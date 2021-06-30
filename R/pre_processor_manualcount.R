@@ -40,6 +40,11 @@ pre_processor_manualcount <- function(
       warning("Only one sheet in the excel workbook expected! Only the first one will be abalysed!")
     }
 
+    x <- readxl::read_excel(
+      path = fn,
+      sheet = 1
+    )
+
     csvn <- gsub(
       pattern = "\\.xlsx$",
       replacement = ".csv",
@@ -51,6 +56,7 @@ pre_processor_manualcount <- function(
       recursive = TRUE,
       showWarnings = FALSE
     )
+
     file.copy(
       file.path( input, "..", "00.general.parameter", "." ),
       file.path( output, "manualcount" ),
@@ -58,21 +64,12 @@ pre_processor_manualcount <- function(
       overwrite = TRUE
     )
 
-    x <- readxl::read_excel(
-      path = fn,
-      sheet = 1
-    )
     utils::write.csv(
       x,
-      file = file.path(tmpdir, csvn),
+      file = file.path(output, "manualcount", csvn),
       row.names = FALSE
     )
 
-	  dir.create(
-  	  file.path(output, "manualcount", "manualcount"),
-   	 recursive = TRUE,
-   	 showWarnings = FALSE
-  	)
   }
 
  ##
