@@ -15,6 +15,13 @@
 #' @export
 #'
 extractor_manualcount <- function( input, output ) {
+  dir.create(
+    file.path(output, "manualcount"),
+    recursive = TRUE,
+    showWarnings = FALSE
+  )
+  loggit::set_logfile(file.path(output, "manualcount", "manualcount.log"))
+
   message("\n########################################################\n")
   message("Extracting manualcount...\n")
 

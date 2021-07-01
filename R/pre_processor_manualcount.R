@@ -8,12 +8,20 @@
 #' @return invisibly \code{TRUE} when completed successful
 #' @importFrom readxl read_excel
 #' @importFrom utils write.csv
+#' @import loggit
 #' @export
 
 pre_processor_manualcount <- function(
   input,
   output
 ) {
+  dir.create(
+    file.path(output, "manualcount"),
+    recursive = TRUE,
+    showWarnings = FALSE
+  )
+  loggit::set_logfile(file.path(output, "manualcount", "manualcount.log"))
+
   message("\n########################################################\n")
   message("\nProcessing manualcount\n")
   ##
@@ -49,12 +57,6 @@ pre_processor_manualcount <- function(
       pattern = "\\.xlsx$",
       replacement = ".csv",
       basename(fn)
-    )
-
-    dir.create(
-      file.path(output, "manualcount"),
-      recursive = TRUE,
-      showWarnings = FALSE
     )
 
     file.copy(
