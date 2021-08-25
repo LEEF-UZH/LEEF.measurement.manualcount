@@ -10,13 +10,13 @@
   "codeRepository": "https://github.com/LEEF-UZH/LEEF.measurement.manualcount",
   "issueTracker": "https://github.com/LEEF-UZH/LEEF.measurement.manualcount/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.1.0 (2021-05-18)",
+  "runtimePlatform": "R version 4.1.1 (2021-08-10)",
   "author": [
     {
       "@type": "Person",
@@ -124,5 +124,5 @@
     }
   ],
   "readme": "https://github.com/LEEF-UZH/LEEF.measurement.manualcount/blob/master/Readme.md",
-  "fileSize": "15.026KB"
+  "fileSize": "15.034KB"
 }

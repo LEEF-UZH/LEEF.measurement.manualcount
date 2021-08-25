@@ -74,7 +74,7 @@ extractor_manualcount <- function( input, output ) {
   )
   utils::write.csv(
     dat,
-    file = file.path(add_path, "manualcount.csv"),
+    file = file.path(add_path, "manualcount_density.csv"),
     row.names = FALSE
   )
 
