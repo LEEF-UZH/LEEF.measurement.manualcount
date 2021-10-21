@@ -15,6 +15,13 @@ pre_processor_manualcount <- function(
   input,
   output
 ) {
+  if ( length( list.files( file.path(input, "manualcount") ) ) == 0 ) {
+    message("\nEmpty or missing manualcount directory - nothing to do.\n")
+    message("\ndone\n")
+    message("########################################################\n")
+    return(invisible(TRUE))
+  }
+
   dir.create(
     file.path(output, "manualcount"),
     recursive = TRUE,
@@ -25,13 +32,6 @@ pre_processor_manualcount <- function(
   message("\n########################################################\n")
   message("\nProcessing manualcount\n")
   ##
-
-  if ( length( list.files( file.path(input, "manualcount") ) ) == 0 ) {
-    message("\nEmpty or missing manualcount directory - nothing to do.\n")
-    message("\ndone\n")
-    message("########################################################\n")
-    return(invisible(TRUE))
-  }
 
   fns <- list.files(
     path = file.path(input, "manualcount"),

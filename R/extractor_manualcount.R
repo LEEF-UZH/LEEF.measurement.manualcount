@@ -20,6 +20,13 @@ extractor_manualcount <- function( input, output ) {
     recursive = TRUE,
     showWarnings = FALSE
   )
+  if ( length( list.files( file.path(input, "manualcount") ) ) == 0 ) {
+    message("\nEmpty or missing manualcount directory - nothing to do.\n")
+    message("\ndone\n")
+    message("########################################################\n")
+    return(invisible(TRUE))
+  }
+
   loggit::set_logfile(file.path(output, "manualcount", "manualcount.log"))
 
   message("\n########################################################\n")
